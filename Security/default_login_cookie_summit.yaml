@@ -1,0 +1,4 @@
+cookie:
+   expiry_days: 0
+   key: st_user_login_key
+   name: YCSummit_cookie
