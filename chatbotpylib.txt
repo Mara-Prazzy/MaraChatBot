@@ -1,0 +1,11 @@
+streamlit
+streamlit_authenticator
+dotenv
+langchain_openai.embeddings
+langchain_openai.chat_models
+langchain_community.vectorstores
+langchain.memory
+langchain.chains
+time
+glob
+yaml
