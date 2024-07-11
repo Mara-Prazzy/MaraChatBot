@@ -786,12 +786,15 @@ def main():
 	if security_allowed_entry():
 
 		if CHAT_STATE_INIT_DONE not in st.session_state:
-			with st.spinner("Processing"):
+    			with st.spinner("Loading documents..."):
 				st.session_state.docsmatrix = get_matrix_docs()
-				st.session_state.docscollection = get_collection_names()
-				initial_state()
-				st.session_state.doc_last_entered = None
-				st.session_state[CHAT_STATE_INIT_DONE] = True
+				if not st.session_state.docsmatrix:
+			            st.error("Failed to load documents.")
+			            return  # Optionally halt further execution
+			        st.session_state.docscollection = get_collection_names()
+			        initial_state()
+			        st.session_state[CHAT_STATE_INIT_DONE] = True
+
 
 		#user_question = st.chat_input(prompt_string)
 
