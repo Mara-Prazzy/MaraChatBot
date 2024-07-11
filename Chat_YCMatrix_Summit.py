@@ -483,7 +483,7 @@ def get_conversation_chain(vectorstore):
 
 def get_matrix_docs():
 	matrix_docs = {}
-	df = pd.read_csv(filename_matrix_docs, delimiter=';', on_bad_lines='skip')
+	df = pd.read_csv(filename_matrix_docs, delim_whitespace=True, engine='python')
 	docs = df.to_dict("records")
 	for item in docs:
 		refid = item.get(KEY_REFID)
