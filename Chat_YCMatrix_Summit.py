@@ -403,6 +403,7 @@ def append_ExplainSources(sources):
 
 def set_VS_state(filename):
 	st.session_state.filename_desiredVS = filename
+	vectorstore = None
 	#Assume Chroma-based unless Pivot, Articles,
 	if (st.session_state[WDGT_VS_CUR] == PIVOT_VS) or \
 		(st.session_state[WDGT_VS_CUR] == ARTICLE_VS) or \
