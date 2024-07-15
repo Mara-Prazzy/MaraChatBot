@@ -475,11 +475,11 @@ def get_conversation_chain(vectorstore):
 		retriever = vectorstore.as_retriever(search_kwargs={"k": CHAT_NUM_DOCS_GET})
 	else:
 		print("***Invalid vectorstore or missing as_retriever method")
-		retun None
+		return None
 	
 	conversation_chain = ConversationalRetrievalChain.from_llm(
 		llm=llm,
-		retriever=vectorstore.as_retriever(search_kwargs={"k":CHAT_NUM_DOCS_GET}),
+		retriever=retriever,
 		memory=st.session_state.memory,
 		return_source_documents=True
 	)
