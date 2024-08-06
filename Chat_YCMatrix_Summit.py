@@ -330,7 +330,7 @@ def get_source_info( doc_list, src_type):
 def append_LogFile(text):
 	timestamp = get_time_str()
 	outfile = open(filename_logfile, "a")
-	outstr = timestamp + " by " + st.session_state["username"] + " : " + text + "\n"
+	outstr = timestamp + " by " + " : " + text + "\n"
 	outfile.write(outstr)
 	outfile.close()
 	return
@@ -339,14 +339,14 @@ def new_ChatFile():
 	timestamp = get_time_str()
 	# Create a Chat File
 	st.session_state.filename_chatfile = (filename_save_root + "Chat_" +
-	                                      st.session_state["username"] + "_" + timestamp + ".txt")
+	                                       "_" + timestamp + ".txt")
 	print("New chat: ", st.session_state.filename_chatfile)
 	outfile = open(st.session_state.filename_chatfile, "w")
 	outfile.write("\n")
 	outfile.close()
 	# Create an Explain File
 	st.session_state.filename_explainfile = (filename_save_root + "Explain_" +
-	                                         st.session_state["username"] + "_" + timestamp + ".txt")
+	                                         + "_" + timestamp + ".txt")
 	outfile = open(st.session_state.filename_explainfile, "w")
 	outfile.write("\n")
 	outfile.close()
@@ -864,7 +864,7 @@ def main():
 		if st.button("Logout"):
 			append_LogFile("Logout")
 			append_ChatFile_Activity("Logout", False)
-			print(st.session_state["username"] + " logged out")
+			print(" logged out")
 			st.session_state["authentication_status"] = False
 			st.session_state["Not_1st_time"] = False
 			del st.session_state[CHAT_STATE_INIT_DONE]
@@ -890,7 +890,7 @@ def main():
 		st.header(title_string)
 
 		#CB240119
-		userid = st.session_state["username"]
+		userid = user
 		hello_usr = r'''$\textsf{\normalsize Hello,}$'''
 		st.markdown(hello_usr + " *" + userid + "*")
 
