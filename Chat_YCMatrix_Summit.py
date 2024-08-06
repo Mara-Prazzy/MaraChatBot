@@ -890,9 +890,9 @@ def main():
 		st.header(title_string)
 
 		#CB240119
-		userid = user
+		#userid = user
 		hello_usr = r'''$\textsf{\normalsize Hello,}$'''
-		st.markdown(hello_usr + " *" + userid + "*")
+		st.markdown(hello_usr + " *" + "userid" + "*")
 
 		#CB240119:
 		info_title = r'''$\textsf{\normalsize You can chat with 4 types of information:}$'''
