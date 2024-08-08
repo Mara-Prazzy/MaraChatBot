@@ -127,11 +127,12 @@ filename_default_cookie = "Security/default_login_cookie_summit.yaml"
 def login():
 	username = st.text_input('Username')
 	password = st.text_input('Password', type='password')
-	
+	st.write("Authetication status before if loop:", st.session_state["authetication_status"])
 	if st.button('Login'):
 		try:
 			id_token = authenticate_user(username, password)
 			st.success('Login successful')
+			st.write("Authetication status within if loop:", st.session_state["authetication_status"])
 			st.write('ID Token:', id_token)
 		except Exception as e:
 			st.error(f'Login failed: {e}')
