@@ -798,6 +798,8 @@ def main():
 
 	#st.session_state.login_auth.login()
 
+	login()
+
 	if login():
 	# if st.session_state["Not_1st_time"] is False:
 	# 	with (st.session_state.chat_col):
