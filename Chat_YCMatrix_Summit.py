@@ -780,6 +780,8 @@ def main():
 	# 	security_setup()
 	# 	st.session_state["security_setup"] = True
 
+	#st.session_state.login_auth.login()
+
 	username = st.text_input('Username')
 	password = st.text_input('Password', type='password')
 
