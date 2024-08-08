@@ -128,10 +128,13 @@ def login():
 	username = st.text_input('Username')
 	password = st.text_input('Password', type='password')
 	#if st.session_state["authentication_status"]:
+	#st.session_state["authentication_status"] = False
 	if st.button('Login'):
 		try:
 			id_token = authenticate_user(username, password)
+			#if st.session_state["
 			st.success('Login successful')
+			#if st.session_state["authentication_status"]:
 			#st.write("Authetication status within if loop:", st.session_state["authetication_status"])
 			st.write('ID Token:', id_token)
 		except Exception as e:
@@ -798,9 +801,10 @@ def main():
 
 	#st.session_state.login_auth.login()
 
-	login()
+	#login()
 
 	if login():
+		st.session_state["authentication_status"] = True
 	# if st.session_state["Not_1st_time"] is False:
 	# 	with (st.session_state.chat_col):
 	# 		st.image("images/YC_summit_logo_sm.png", width=250)
@@ -808,7 +812,7 @@ def main():
 
 
 	#if security_allowed_entry():
-		
+		#st.session_state 
 		if CHAT_STATE_INIT_DONE not in st.session_state:
 			with st.spinner("Loading documents..."):
 				st.session_state.docsmatrix = get_matrix_docs()
