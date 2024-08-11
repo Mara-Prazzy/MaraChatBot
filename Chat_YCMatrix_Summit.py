@@ -928,7 +928,7 @@ def main():
 			#CB240119
 			#userid = user
 			hello_usr = r'''$\textsf{\normalsize Hello,}$'''
-			st.markdown(hello_usr + " *" + "userid" + "*")
+			st.markdown(hello_usr + " *" + login.username + "*")
 	
 			#CB240119:
 			info_title = r'''$\textsf{\normalsize You can chat with 4 types of information:}$'''
