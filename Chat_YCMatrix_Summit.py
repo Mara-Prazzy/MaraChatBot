@@ -136,6 +136,7 @@ def login():
 			if id_token:
 				st.session_state['logged_in'] = True
 				st.success('Login successful')
+				st.experimental_rerun()
 			else:
 				st.error("Invalid username or password")	
 			#if st.session_state["authentication_status"]:
