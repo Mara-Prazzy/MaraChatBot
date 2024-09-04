@@ -847,7 +847,7 @@ def main():
 			#doc_display_textmessage("Hello, *" + userstr + "*")
 			#CB240119 st.write("Hello, *" + userid + "*")
 	
-			if st.radio("Select Database:", [PIVOT_VS, ARTICLE_VS, REDDIT_VS, MATRIX_VS],
+			if st.radio("Select Database:", [PIVOT_VS ''', ARTICLE_VS''' , REDDIT_VS, MATRIX_VS],
 						#captions=[PIVOT_DESC, ARTICLE_DESC, REDDIT_DESC, MATRIX_DESC],  #CB240119
 						key=WDGT_VS) != \
 				st.session_state[WDGT_VS_CUR]:
