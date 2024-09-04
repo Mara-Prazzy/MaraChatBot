@@ -972,8 +972,8 @@ def main():
 	
 		st.markdown(script_col_active, unsafe_allow_html=True)
 
-	else:
-		login()
+	# else:
+	# 	login()
 
 
 
