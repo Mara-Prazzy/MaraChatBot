@@ -854,8 +854,8 @@ def main():
 					st.session_state[WDGT_VS_CUR] = st.session_state[WDGT_VS]
 					if st.session_state[WDGT_VS_CUR] == PIVOT_VS:
 						st.session_state.filename_desiredVS = filename_vectorstore_Pivot
-					if st.session_state[WDGT_VS_CUR] == ARTICLE_VS:
-						st.session_state.filename_desiredVS = filename_vectorstore_Article
+					# if st.session_state[WDGT_VS_CUR] == ARTICLE_VS:
+					# 	st.session_state.filename_desiredVS = filename_vectorstore_Article
 					if st.session_state[WDGT_VS_CUR] == REDDIT_VS:
 						st.session_state.filename_desiredVS = filename_vectorstore_Reddit
 					if st.session_state[WDGT_VS_CUR] == MATRIX_VS:
