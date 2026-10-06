@@ -418,8 +418,12 @@ def set_VS_state(filename):
 			vectorstore = get_vectorstore_fromdisk_Chroma(coll_name, file_name)
 		else:
 			print("***VS filename and collection not found")
+	if vectorstore is not None:  # Check if vectorstore is assigned
+		st.session_state.conversation = get_conversation_chain(vectorstore)
+	else:
+		print("***Vectorstore not initialized correctly")
 
-	st.session_state.conversation = get_conversation_chain(vectorstore)
+	#st.session_state.conversation = get_conversation_chain(vectorstore)
 	return
 
 def set_vectorstore(filename, label):
@@ -462,6 +466,13 @@ def get_collection_names():
 #***********************
 
 def get_conversation_chain(vectorstore):
+	# retriever = None
+	# if vectorstore is not None and hasattr(vectorstore, 'as_retriever'):
+	# 	retriever = vectorstore.as_retriever(search_kwargs={"k": CHAT_NUM_DOCS_GET})
+	# else:
+	# 	print("***Invalid vectorstore or missing as_retriever method")
+	# # Rest of your logic
+	# return retriever
 	temp = st.session_state[WDGT_CREATIVITY]/10.0
 	llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=temp)
 	st.session_state.memory = ConversationBufferMemory(memory_key=CHAT_HISTORY,
