@@ -17,7 +17,7 @@ def authenticate_user(username, password):
     response = cognito_client.admin_initiate_auth(
         UserPoolId = os.getenv('UserPoolId'),  # Your User Pool ID
         ClientId = os.getenv('ClientId'),  # Your App Client ID
-        AuthFlow='ALLOW_ADMIN_USER_PASSWORD_AUTH',
+        AuthFlow='ADMIN_USER_PASSWORD_AUTH',
         AuthParameters={
             'USERNAME': username,
             'PASSWORD': password,
