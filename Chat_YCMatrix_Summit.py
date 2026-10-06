@@ -410,14 +410,14 @@ def set_VS_state(filename):
 			(st.session_state[WDGT_VS_CUR] == REDDIT_VS):
 		vectorstore = get_vectorstore_fromdisk(st.session_state.filename_desiredVS)
 	else:
-			docsinfo = st.session_state.docscollection
-			docinfo = docsinfo.get(filename)   #Which also includes the "Matrix" itself as a valid reference
-			if docinfo != None:
-				coll_name = docinfo.get(KEY_COLLECTION)
-				file_name = docinfo.get(KEY_FILENAME)
-				vectorstore = get_vectorstore_fromdisk_Chroma(coll_name, file_name)
-			else:
-				print("***VS filename and collection not found")
+		docsinfo = st.session_state.docscollection
+		docinfo = docsinfo.get(filename)   #Which also includes the "Matrix" itself as a valid reference
+		if docinfo != None:
+			coll_name = docinfo.get(KEY_COLLECTION)
+			file_name = docinfo.get(KEY_FILENAME)
+			vectorstore = get_vectorstore_fromdisk_Chroma(coll_name, file_name)
+		else:
+			print("***VS filename and collection not found")
 
 	st.session_state.conversation = get_conversation_chain(vectorstore)
 	return
