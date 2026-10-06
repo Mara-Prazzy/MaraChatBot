@@ -780,6 +780,17 @@ def main():
 	# 	security_setup()
 	# 	st.session_state["security_setup"] = True
 
+	username = st.text_input('Username')
+	password = st.text_input('Password', type='password')
+
+	if st.button('Login'):
+	    try:
+	        id_token = authenticate_user(username, password)
+	        st.success('Login successful')
+	        st.write('ID Token:', id_token)
+	    except Exception as e:
+	        st.error(f'Login failed: {e}')
+
 
 	# if st.session_state["Not_1st_time"] is False:
 	# 	with (st.session_state.chat_col):
