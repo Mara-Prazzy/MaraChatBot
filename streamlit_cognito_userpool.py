@@ -8,9 +8,9 @@ load_dotenv()
 
 # Initialize Cognito client
 cognito_client = boto3.client('cognito-idp', 
-                              region_name = os.getenv('region_name'),  # Your AWS region
-                              aws_access_key_id = os.getenv('aws_access_key_id'),  # Your AWS access key
-                              aws_secret_access_key = os.getenv('aws_secret_access_key'))  # Your AWS secret key
+                              region_name = os.getenv('AWS_DEFAULT_REGION'),  # Your AWS region
+                              aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID'),  # Your AWS access key
+                              aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY'))  # Your AWS secret key
 
 # Function to authenticate user
 def authenticate_user(username, password):
