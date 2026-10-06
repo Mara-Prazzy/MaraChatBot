@@ -467,21 +467,23 @@ def get_collection_names():
 
 def get_conversation_chain(vectorstore):
 	retriever = None
+	temp = st.session_state[WDGT_CREATIVITY]/10.0
+	llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=temp)
+	st.session_state.memory = ConversationBufferMemory(memory_key=CHAT_HISTORY,input_key=CHAT_QUESTION, output_key=CHAT_ANSWER, return_messages=True)
+
 	if vectorstore is not None and hasattr(vectorstore, 'as_retriever'):
 		retriever = vectorstore.as_retriever(search_kwargs={"k": CHAT_NUM_DOCS_GET})
 	else:
 		print("***Invalid vectorstore or missing as_retriever method")
-	Rest of your logic
-
-	temp = st.session_state[WDGT_CREATIVITY]/10.0
-	llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=temp)
-	st.session_state.memory = ConversationBufferMemory(memory_key=CHAT_HISTORY,input_key=CHAT_QUESTION, output_key=CHAT_ANSWER, return_messages=True)
+		retun None
+	
 	conversation_chain = ConversationalRetrievalChain.from_llm(
 		llm=llm,
 		retriever=vectorstore.as_retriever(search_kwargs={"k":CHAT_NUM_DOCS_GET}),
 		memory=st.session_state.memory,
 		return_source_documents=True
 	)
+	
 	print("Conversation reset")
 	return conversation_chain
 
