@@ -7,7 +7,7 @@ from streamlit_extras.stylable_container import stylable_container
 from dotenv import load_dotenv
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_openai.chat_models import ChatOpenAI
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import faiss
 from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
