@@ -898,11 +898,11 @@ def main():
 	
 			#st.session_state.login_auth.logout("Logout", 'main')
 			if st.button("Logout"):
-				append_LogFile("Logout")
-				append_ChatFile_Activity("Logout", False)
+				#append_LogFile("Logout")
+				#append_ChatFile_Activity("Logout", False)
 				print(" logged out")
-				st.session_state["authentication_status"] = False
-				st.session_state["Not_1st_time"] = False
+				st.session_state["logged_in"] = False
+				#st.session_state["Not_1st_time"] = False
 				del st.session_state[CHAT_STATE_INIT_DONE]
 				st.rerun()
 	
