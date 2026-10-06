@@ -171,8 +171,7 @@ def security_setup():
 		st.session_state.credentials_dict,
 		cookie_data['cookie']['name'],
 		cookie_data['cookie']['key'],
-		cookie_data['cookie']['expiry_days'],
-		preauthorized=None
+		cookie_data['cookie']['expiry_days']
 	)
 
 	st.session_state["Not_1st_time"] = False
