@@ -78,8 +78,7 @@ def security_setup():
 		ssv[SS_DICT_CREDENTIALS],
 		cookie_data[SECURE_KEY_COOKIE][SECURE_KEY_NAME],
 		cookie_data[SECURE_KEY_COOKIE][SECURE_KEY_KEY],
-		cookie_data[SECURE_KEY_COOKIE][SECURE_KEY_EXPIRE],
-		preauthorized=None
+		cookie_data[SECURE_KEY_COOKIE][SECURE_KEY_EXPIRE]
 	)
 
 	#set up the flag to check if a user has been signed in for the initialization process
