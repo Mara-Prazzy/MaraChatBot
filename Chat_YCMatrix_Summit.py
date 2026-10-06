@@ -124,6 +124,20 @@ load_dotenv()
 filedir_users = "Security/Users/"
 filename_default_cookie = "Security/default_login_cookie_summit.yaml"
 
+def login():
+	username = st.text_input('Username')
+	password = st.text_input('Password', type='password')
+	
+	if st.button('Login'):
+		    try:	    
+				id_token = authenticate_user(username, password)
+				st.success('Login successful')
+				st.write('ID Token:', id_token)
+	    	except Exception as e:
+				st.error(f'Login failed: {e}')
+	return
+
+
 def security_reset_user_file( userid, password, flag_1st):
 	filename_yaml_user = filedir_users + userid + ".yaml"
 	with open(filename_yaml_user, 'r') as file:
@@ -782,16 +796,9 @@ def main():
 
 	#st.session_state.login_auth.login()
 
-	username = st.text_input('Username')
-	password = st.text_input('Password', type='password')
+	login()
 
-	if st.button('Login'):
-	    try:
-	        id_token = authenticate_user(username, password)
-	        st.success('Login successful')
-	        st.write('ID Token:', id_token)
-	    except Exception as e:
-	        st.error(f'Login failed: {e}')
+	
 
 
 	# if st.session_state["Not_1st_time"] is False:
