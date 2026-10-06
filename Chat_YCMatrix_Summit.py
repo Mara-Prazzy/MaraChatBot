@@ -133,10 +133,14 @@ def login():
 		try:
 			id_token = authenticate_user(username, password)
 			#if st.session_state["
-			st.success('Login successful')
+			if id_token:
+				st.session_state['logged_in'] = True
+				st.success('Login successful')
+			else:
+				st.error("Invalid username or password")	
 			#if st.session_state["authentication_status"]:
 			#st.write("Authetication status within if loop:", st.session_state["authetication_status"])
-			st.write('ID Token:', id_token)
+			#st.write('ID Token:', id_token)
 		except Exception as e:
 			st.error(f'Login failed: {e}')
 		
@@ -803,8 +807,14 @@ def main():
 
 	#login()
 
-	if login():
-		st.session_state["authentication_status"] = True
+	if 'logged_in' not is st.session_state:
+		st.session_state['logged_in'] = False
+
+	if st.session_state['logged_in']:
+		
+
+	# if login():
+	# 	st.session_state["authentication_status"] = True
 	# if st.session_state["Not_1st_time"] is False:
 	# 	with (st.session_state.chat_col):
 	# 		st.image("images/YC_summit_logo_sm.png", width=250)
@@ -959,6 +969,11 @@ def main():
 				doc_display_textmessage("Need YC-curated database set in order to use.")
 	
 		st.markdown(script_col_active, unsafe_allow_html=True)
+
+	else:
+		login()
+
+
 
 
 if __name__ == '__main__':
