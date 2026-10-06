@@ -483,7 +483,7 @@ def get_conversation_chain(vectorstore):
 
 def get_matrix_docs():
 	try:
-		df = pd.read_csv(filename_matrix_docs)
+		df = pd.read_csv(filename_matrix_docs, encoding='utf-8')
 		if df.empty:
 		    st.error("CSV file is empty.")
 		    return {}
