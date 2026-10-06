@@ -134,8 +134,9 @@ def login():
 			st.success('Login successful')
 			st.write('ID Token:', id_token)
 		except Exception as e:
-			st.error(f'Login failed: {e}')    
-    	return
+			st.error(f'Login failed: {e}')
+		
+	return
 
 
 def security_reset_user_file( userid, password, flag_1st):
