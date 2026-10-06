@@ -809,10 +809,10 @@ def main():
 
 	#login()
 
-	if 'logged_in' not in st.session_state:
-		st.session_state['logged_in'] = False
+	# if 'logged_in' not in st.session_state:
+	# 	st.session_state['logged_in'] = False
 
-	if st.session_state['logged_in']:
+	# if st.session_state['logged_in']:
 		
 
 	# if login():
@@ -825,155 +825,155 @@ def main():
 
 	#if security_allowed_entry():
 		#st.session_state 
-		if CHAT_STATE_INIT_DONE not in st.session_state:
-			with st.spinner("Loading documents..."):
-				st.session_state.docsmatrix = get_matrix_docs()
-				if not st.session_state.docsmatrix:
-					st.error("Failed to load documents.")
-					return  # Optionally halt further execution
-				st.session_state.docscollection = get_collection_names()
-				initial_state()
-				st.session_state[CHAT_STATE_INIT_DONE] = True
-		#user_question = st.chat_input(prompt_string)
-	
-		with (st.session_state.mysidebar):
-	
-			st.markdown(script_col_noscroll, unsafe_allow_html=True)
-	
-			st.image("images/YC_summit_logo_sm.png", width=150)
-	
-			#CB240119 userid = st.session_state["username"]
-			#userstr = userid.split("@")[0]
-			#doc_display_textmessage("Hello, *" + userstr + "*")
-			#CB240119 st.write("Hello, *" + userid + "*")
-			#if st.radio("Select Database:", [PIVOT_VS, ARTICLE_VS, REDDIT_VS, MATRIX_VS],	
-			if st.radio("Select Database:", [PIVOT_VS, REDDIT_VS, MATRIX_VS],
-						#captions=[PIVOT_DESC, ARTICLE_DESC, REDDIT_DESC, MATRIX_DESC],  #CB240119
-						key=WDGT_VS) != \
-				st.session_state[WDGT_VS_CUR]:
-					st.session_state[WDGT_VS_CUR] = st.session_state[WDGT_VS]
-					if st.session_state[WDGT_VS_CUR] == PIVOT_VS:
-						st.session_state.filename_desiredVS = filename_vectorstore_Pivot
-					# if st.session_state[WDGT_VS_CUR] == ARTICLE_VS:
-					# 	st.session_state.filename_desiredVS = filename_vectorstore_Article
-					if st.session_state[WDGT_VS_CUR] == REDDIT_VS:
-						st.session_state.filename_desiredVS = filename_vectorstore_Reddit
-					if st.session_state[WDGT_VS_CUR] == MATRIX_VS:
-						st.session_state.filename_desiredVS = MATRIX_VS
-					set_vectorstore(st.session_state.filename_desiredVS, st.session_state[WDGT_VS_CUR])
-	
-	
-			#if st.slider("Creativity Level", 0, 10, key=WDGT_CREATIVITY) != st.session_state[WDGT_CREATIVITY_CUR]:
-			#	set_Creativity()
-			#	st.session_state[WDGT_CREATIVITY_CUR] = st.session_state[WDGT_CREATIVITY]
-			#	print("Temp slider changed")
-	
-			#if st.toggle("Show Sources", key=WDGT_SOURCES) != st.session_state[WDGT_SOURCES_CUR]:
-			#	st.session_state[WDGT_SOURCES_CUR] = st.session_state[WDGT_SOURCES]
-			#	print("Sources toggle changed")
-	
-			st.divider()
-	
-			#st.text_input("Email address:", placeholder="enter your email address",
-			#			  key=WDGT_EMAIL_NAME, value=None, label_visibility="collapsed")
-	
-	
-			#st.divider()
-	
-			if st.button("Clear Chat Q&A"):
-				clear_chat_mem_hist()
-				set_VS_state(st.session_state.filename_desiredVS)
-				#st.write(st.session_state[WDGT_VS_CUR], " chat has been cleared.")
-				append_ChatFile_Activity("Cleared Chat for database --> " + st.session_state[WDGT_VS_CUR],True)
-	
-			if st.button("Email Chat Session"):
-				#if st.session_state[WDGT_EMAIL_NAME] == None:
-				#	doc_display_textwarning("Need an email name")
-				#else:
-				#	send_chat_email(st.session_state[WDGT_EMAIL_NAME])
-				send_chat_email(st.session_state["username"])
-	
-			#st.button("Fresh Start", on_click=fresh_start)
-	
-			# st.button("Reset", on_click=do_reset)
-	
-			#st.session_state.login_auth.logout("Logout", 'main')
-			if st.button("Logout"):
-				#append_LogFile("Logout")
-				#append_ChatFile_Activity("Logout", False)
-				print(" logged out")
-				st.session_state["logged_in"] = False
-				#st.session_state["Not_1st_time"] = False
-				del st.session_state[CHAT_STATE_INIT_DONE]
-				st.rerun()
-	
-			st.divider()
-	
-			if st.button("Disclaimer"):
-				with st.form("Disclaimer"):
-					st.write(disclaimer)
-					st.form_submit_button("Okay", on_click=disclaimer_seen)
-	
-		with st.session_state.chat_col:
-	
-			if len(st.session_state.display_chat) != 0:  # if there is something in the chat to display, make the column reverse
-				st.markdown(script_col_scroll, unsafe_allow_html=True)
-			else:
-				st.markdown(script_col_noscroll, unsafe_allow_html=True)
-	
-			#st.image("images/YC_summit_logo_sm.png", width=250)   #CB240119
-			st.markdown(csschat, unsafe_allow_html=True)
-	
-			st.header(title_string)
-	
-			#CB240119
-			userid = st.session_state['username']
-			hello_usr = r'''$\textsf{\normalsize Hello,}$'''
-			st.markdown(hello_usr + " *" + userid + "*")
-	
-			#CB240119:
-			info_title = r'''$\textsf{\normalsize You can chat with 4 types of information:}$'''
-			st.write(info_title)
-			info_db = ":large_orange_circle: **" + PIVOT_VS + "** - *" + PIVOT_DESC + "*" + "  \n"
-			info_db = info_db + ":large_yellow_circle: **" + ARTICLE_VS + "** - *" + ARTICLE_DESC + "*"  + "  \n"
-			info_db = info_db + ":large_green_circle: **" + REDDIT_VS + "** - *" + REDDIT_DESC + "*"  + "  \n"
-			info_db = info_db + ":large_purple_circle: **" + MATRIX_VS + "** - *" + MATRIX_DESC + "*"
-			st.markdown(info_db)
-	
-	
-	
-	
-	
-			#Changes to get a better user input line for chat
-			display_Chat()
-			user_question = st.text_input(CHAT_PROMPT_STRING,
-										  value=INIT_VAL_CHAT_INPUT,
-										  on_change=onchange_question,
-										  key=SS_CHAT_WDGT_INPUT)
-			#if user_question:
-			#	handle_userinput(user_question)
-	
-			#display_Chat()
-	
-	
-		with st.session_state.doc_col:
-	
-			st.markdown(script_col_noscroll, unsafe_allow_html=True)
-	
-			st.header("Explore Documents")
-	
-			if st.session_state[WDGT_VS_CUR] == MATRIX_VS:
-				#CB240119 st.number_input("Enter Doc# (from yc#####-cccc-aaaa)", min_value=0, value=None,
-				#CB240119												format="%d", step=None, key=WDGT_DOCNUM)
-				st.text_input("Enter Document - YC#####", value=None, max_chars=7, key=WDGT_DOCNUM)
-				handle_doc_request()
-			else:
-				doc_display_textmessage("Need YC-curated database set in order to use.")
-	
-		st.markdown(script_col_active, unsafe_allow_html=True)
+	if CHAT_STATE_INIT_DONE not in st.session_state:
+		with st.spinner("Loading documents..."):
+			st.session_state.docsmatrix = get_matrix_docs()
+			if not st.session_state.docsmatrix:
+				st.error("Failed to load documents.")
+				return  # Optionally halt further execution
+			st.session_state.docscollection = get_collection_names()
+			initial_state()
+			st.session_state[CHAT_STATE_INIT_DONE] = True
+	#user_question = st.chat_input(prompt_string)
 
-	else:
-		login()
+	with (st.session_state.mysidebar):
+
+		st.markdown(script_col_noscroll, unsafe_allow_html=True)
+
+		st.image("images/YC_summit_logo_sm.png", width=150)
+
+		#CB240119 userid = st.session_state["username"]
+		#userstr = userid.split("@")[0]
+		#doc_display_textmessage("Hello, *" + userstr + "*")
+		#CB240119 st.write("Hello, *" + userid + "*")
+		#if st.radio("Select Database:", [PIVOT_VS, ARTICLE_VS, REDDIT_VS, MATRIX_VS],	
+		if st.radio("Select Database:", [PIVOT_VS, REDDIT_VS, MATRIX_VS],
+					#captions=[PIVOT_DESC, ARTICLE_DESC, REDDIT_DESC, MATRIX_DESC],  #CB240119
+					key=WDGT_VS) != \
+			st.session_state[WDGT_VS_CUR]:
+				st.session_state[WDGT_VS_CUR] = st.session_state[WDGT_VS]
+				if st.session_state[WDGT_VS_CUR] == PIVOT_VS:
+					st.session_state.filename_desiredVS = filename_vectorstore_Pivot
+				# if st.session_state[WDGT_VS_CUR] == ARTICLE_VS:
+				# 	st.session_state.filename_desiredVS = filename_vectorstore_Article
+				if st.session_state[WDGT_VS_CUR] == REDDIT_VS:
+					st.session_state.filename_desiredVS = filename_vectorstore_Reddit
+				if st.session_state[WDGT_VS_CUR] == MATRIX_VS:
+					st.session_state.filename_desiredVS = MATRIX_VS
+				set_vectorstore(st.session_state.filename_desiredVS, st.session_state[WDGT_VS_CUR])
+
+
+		#if st.slider("Creativity Level", 0, 10, key=WDGT_CREATIVITY) != st.session_state[WDGT_CREATIVITY_CUR]:
+		#	set_Creativity()
+		#	st.session_state[WDGT_CREATIVITY_CUR] = st.session_state[WDGT_CREATIVITY]
+		#	print("Temp slider changed")
+
+		#if st.toggle("Show Sources", key=WDGT_SOURCES) != st.session_state[WDGT_SOURCES_CUR]:
+		#	st.session_state[WDGT_SOURCES_CUR] = st.session_state[WDGT_SOURCES]
+		#	print("Sources toggle changed")
+
+		st.divider()
+
+		#st.text_input("Email address:", placeholder="enter your email address",
+		#			  key=WDGT_EMAIL_NAME, value=None, label_visibility="collapsed")
+
+
+		#st.divider()
+
+		if st.button("Clear Chat Q&A"):
+			clear_chat_mem_hist()
+			set_VS_state(st.session_state.filename_desiredVS)
+			#st.write(st.session_state[WDGT_VS_CUR], " chat has been cleared.")
+			append_ChatFile_Activity("Cleared Chat for database --> " + st.session_state[WDGT_VS_CUR],True)
+
+		if st.button("Email Chat Session"):
+			#if st.session_state[WDGT_EMAIL_NAME] == None:
+			#	doc_display_textwarning("Need an email name")
+			#else:
+			#	send_chat_email(st.session_state[WDGT_EMAIL_NAME])
+			send_chat_email(st.session_state["username"])
+
+		#st.button("Fresh Start", on_click=fresh_start)
+
+		# st.button("Reset", on_click=do_reset)
+
+		#st.session_state.login_auth.logout("Logout", 'main')
+		if st.button("Logout"):
+			#append_LogFile("Logout")
+			#append_ChatFile_Activity("Logout", False)
+			print(" logged out")
+			st.session_state["logged_in"] = False
+			#st.session_state["Not_1st_time"] = False
+			del st.session_state[CHAT_STATE_INIT_DONE]
+			st.rerun()
+
+		st.divider()
+
+		if st.button("Disclaimer"):
+			with st.form("Disclaimer"):
+				st.write(disclaimer)
+				st.form_submit_button("Okay", on_click=disclaimer_seen)
+
+	with st.session_state.chat_col:
+
+		if len(st.session_state.display_chat) != 0:  # if there is something in the chat to display, make the column reverse
+			st.markdown(script_col_scroll, unsafe_allow_html=True)
+		else:
+			st.markdown(script_col_noscroll, unsafe_allow_html=True)
+
+		#st.image("images/YC_summit_logo_sm.png", width=250)   #CB240119
+		st.markdown(csschat, unsafe_allow_html=True)
+
+		st.header(title_string)
+
+		#CB240119
+		userid = st.session_state['username']
+		hello_usr = r'''$\textsf{\normalsize Hello,}$'''
+		st.markdown(hello_usr + " *" + userid + "*")
+
+		#CB240119:
+		info_title = r'''$\textsf{\normalsize You can chat with 4 types of information:}$'''
+		st.write(info_title)
+		info_db = ":large_orange_circle: **" + PIVOT_VS + "** - *" + PIVOT_DESC + "*" + "  \n"
+		info_db = info_db + ":large_yellow_circle: **" + ARTICLE_VS + "** - *" + ARTICLE_DESC + "*"  + "  \n"
+		info_db = info_db + ":large_green_circle: **" + REDDIT_VS + "** - *" + REDDIT_DESC + "*"  + "  \n"
+		info_db = info_db + ":large_purple_circle: **" + MATRIX_VS + "** - *" + MATRIX_DESC + "*"
+		st.markdown(info_db)
+
+
+
+
+
+		#Changes to get a better user input line for chat
+		display_Chat()
+		user_question = st.text_input(CHAT_PROMPT_STRING,
+									  value=INIT_VAL_CHAT_INPUT,
+									  on_change=onchange_question,
+									  key=SS_CHAT_WDGT_INPUT)
+		#if user_question:
+		#	handle_userinput(user_question)
+
+		#display_Chat()
+
+
+	with st.session_state.doc_col:
+
+		st.markdown(script_col_noscroll, unsafe_allow_html=True)
+
+		st.header("Explore Documents")
+
+		if st.session_state[WDGT_VS_CUR] == MATRIX_VS:
+			#CB240119 st.number_input("Enter Doc# (from yc#####-cccc-aaaa)", min_value=0, value=None,
+			#CB240119												format="%d", step=None, key=WDGT_DOCNUM)
+			st.text_input("Enter Document - YC#####", value=None, max_chars=7, key=WDGT_DOCNUM)
+			handle_doc_request()
+		else:
+			doc_display_textmessage("Need YC-curated database set in order to use.")
+
+	st.markdown(script_col_active, unsafe_allow_html=True)
+
+	# else:
+	# 	login()
 
 
 
