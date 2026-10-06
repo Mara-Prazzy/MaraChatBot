@@ -1,4 +1,9 @@
 import boto3
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 # Initialize Cognito client
 cognito_client = boto3.client('cognito-idp', 
