@@ -1,2 +1,9 @@
 #ignore env files
 .env
+
+# Private runtime configuration
+.env.*
+!.env.example
+.streamlit/secrets.toml
+Security/Users/
+Security/default_login_cookie_summit.yaml
