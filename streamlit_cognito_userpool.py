@@ -15,8 +15,8 @@ cognito_client = boto3.client('cognito-idp',
 # Function to authenticate user
 def authenticate_user(username, password):
     response = cognito_client.admin_initiate_auth(
-        UserPoolId = os.getenv('UserPoolId'),  # Your User Pool ID
-        ClientId = os.getenv('ClientId'),  # Your App Client ID
+        UserPoolId = os.getenv('COGNITO_USER_POOL_ID'),  # Your User Pool ID
+        ClientId = os.getenv('COGNITO_APP_CLIENT_ID'),  # Your App Client ID
         AuthFlow='ADMIN_USER_PASSWORD_AUTH',
         AuthParameters={
             'USERNAME': username,
