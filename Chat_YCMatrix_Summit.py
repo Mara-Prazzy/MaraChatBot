@@ -345,7 +345,7 @@ def new_ChatFile():
 	outfile.write("\n")
 	outfile.close()
 	# Create an Explain File
-	st.session_state.filename_explainfile = (filename_save_root + "Explain_" +
+	st.session_state.filename_explainfile = (filename_save_root + "Explain_" 
 	                                         + "_" + timestamp + ".txt")
 	outfile = open(st.session_state.filename_explainfile, "w")
 	outfile.write("\n")
