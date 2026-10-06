@@ -1,5 +1,6 @@
 import boto3
 from dotenv import load_dotenv
+import os
 
 
 load_dotenv()
@@ -7,15 +8,15 @@ load_dotenv()
 
 # Initialize Cognito client
 cognito_client = boto3.client('cognito-idp', 
-                              region_name='region_name',  # Your AWS region
-                              aws_access_key_id='aws_access_key_id',  # Your AWS access key
-                              aws_secret_access_key='aws_secret_access_key')  # Your AWS secret key
+                              region_name = os.getenv('region_name'),  # Your AWS region
+                              aws_access_key_id = os.getenv('aws_access_key_id'),  # Your AWS access key
+                              aws_secret_access_key = os.getenv('aws_secret_access_key')  # Your AWS secret key
 
 # Function to authenticate user
 def authenticate_user(username, password):
     response = cognito_client.admin_initiate_auth(
-        UserPoolId='UserPoolId',  # Your User Pool ID
-        ClientId='ClientId',  # Your App Client ID
+        UserPoolId = os.getenv('UserPoolId'),  # Your User Pool ID
+        ClientId = os.getenv('ClientId'),  # Your App Client ID
         AuthFlow='ALLOW_ADMIN_USER_PASSWORD_AUTH',
         AuthParameters={
             'USERNAME': username,
