@@ -444,7 +444,7 @@ def get_collection_names():
 	dict_item[KEY_COLLECTION] = VS_ALL_PROJECT
 	dict_item[KEY_FILENAME] = filename_vectorstore_Matrix
 	docs_names[MATRIX_VS] = dict_item
-	file_list = glob.glob("*", dir_fd=filebase_doc_vectorstore)
+	file_list = glob.glob(filebase_doc_vectorstore + '*')
 	#print(file_list)
 	for item in file_list:
 		dict_item = {}
