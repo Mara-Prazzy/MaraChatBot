@@ -482,22 +482,13 @@ def get_conversation_chain(vectorstore):
 #***********************
 
 def get_matrix_docs():
-	try:
-		df = pd.read_csv(filename_matrix_docs, encoding='utf-8')
-		if df.empty:
-		    st.error("CSV file is empty.")
-		    return {}
-		docs = df.to_dict("records")
-		matrix_docs = {item.get(KEY_REFID)[:7]: item for item in docs if item.get(KEY_REFID)}
-	except FileNotFoundError:
-		st.error(f"File not found: {filename_matrix_docs}")
-		return {}
-	except pd.errors.EmptyDataError:
-		st.error("No data in file.")
-		return {}
-	except Exception as e:
-		st.error(f"An error occurred while reading the CSV: {e}")
-		return {}
+	matrix_docs = {}
+	df = pd.read_csv(filename_matrix_docs)
+	docs = df.to_dict("records")
+	for item in docs:
+		refid = item.get(KEY_REFID)
+		key_yc = refid[:7]
+		matrix_docs[key_yc] = item
 	return matrix_docs
 
 def handle_doc_request():
