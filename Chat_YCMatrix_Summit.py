@@ -412,7 +412,7 @@ def set_VS_state(filename):
 	else:
 		docsinfo = st.session_state.docscollection
 		docinfo = docsinfo.get(filename)   #Which also includes the "Matrix" itself as a valid reference
-		if docinfo != None:
+		if docinfo is not None:
 			coll_name = docinfo.get(KEY_COLLECTION)
 			file_name = docinfo.get(KEY_FILENAME)
 			vectorstore = get_vectorstore_fromdisk_Chroma(coll_name, file_name)
@@ -466,18 +466,16 @@ def get_collection_names():
 #***********************
 
 def get_conversation_chain(vectorstore):
-	# retriever = None
-	# if vectorstore is not None and hasattr(vectorstore, 'as_retriever'):
-	# 	retriever = vectorstore.as_retriever(search_kwargs={"k": CHAT_NUM_DOCS_GET})
-	# else:
-	# 	print("***Invalid vectorstore or missing as_retriever method")
-	# # Rest of your logic
-	# return retriever
+	retriever = None
+	if vectorstore is not None and hasattr(vectorstore, 'as_retriever'):
+		retriever = vectorstore.as_retriever(search_kwargs={"k": CHAT_NUM_DOCS_GET})
+	else:
+		print("***Invalid vectorstore or missing as_retriever method")
+	Rest of your logic
+
 	temp = st.session_state[WDGT_CREATIVITY]/10.0
 	llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=temp)
-	st.session_state.memory = ConversationBufferMemory(memory_key=CHAT_HISTORY,
-													   input_key=CHAT_QUESTION, output_key=CHAT_ANSWER,
-													   return_messages=True)
+	st.session_state.memory = ConversationBufferMemory(memory_key=CHAT_HISTORY,input_key=CHAT_QUESTION, output_key=CHAT_ANSWER, return_messages=True)
 	conversation_chain = ConversationalRetrievalChain.from_llm(
 		llm=llm,
 		retriever=vectorstore.as_retriever(search_kwargs={"k":CHAT_NUM_DOCS_GET}),
